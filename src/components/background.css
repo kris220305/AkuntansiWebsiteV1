@@ -1,0 +1,32 @@
+/* Cosmos-style background: deep gradient + animated orbs */
+.bg-cosmos{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(45vmax 22vmax at 60% 30%, rgba(139,92,246,.14), transparent),
+    radial-gradient(34vmax 18vmax at 20% 80%, rgba(34,211,238,.12), transparent),
+    linear-gradient(180deg, #0f1023 0%, #1a1c3a 40%, #180f2a 100%);
+}
+
+.orb{position:absolute;border-radius:50%;filter:blur(0.6px);
+  background:radial-gradient(closest-side, rgba(255,255,255,.18), rgba(139,92,246,.35), rgba(0,0,0,0));
+  animation:float 16s ease-in-out infinite;
+}
+.o1{width:clamp(140px, 22vmin, 240px);height:clamp(140px, 22vmin, 240px);left:8%;top:24%;animation-delay:-2s}
+.o2{width:clamp(120px, 18vmin, 200px);height:clamp(120px, 18vmin, 200px);right:10%;top:14%;background:radial-gradient(closest-side, rgba(255,255,255,.18), rgba(34,211,238,.35), rgba(0,0,0,0));animation-delay:1s}
+.o3{width:clamp(160px, 26vmin, 300px);height:clamp(160px, 26vmin, 300px);right:18%;bottom:12%;background:radial-gradient(closest-side, rgba(255,255,255,.18), rgba(255,140,0,.35), rgba(0,0,0,0));animation-delay:3s}
+.o4{width:clamp(100px, 16vmin, 160px);height:clamp(100px, 16vmin, 160px);left:22%;bottom:16%;background:radial-gradient(closest-side, rgba(255,255,255,.18), rgba(139,92,246,.45), rgba(0,0,0,0));animation-delay:6s}
+
+@keyframes float{
+  0%{transform:translateY(0) translateX(0)}
+  50%{transform:translateY(-14px) translateX(10px)}
+  100%{transform:translateY(0) translateX(0)}
+}
+
+/* Reduce Motion */
+@media (prefers-reduced-motion: reduce) {
+  .orb { animation: none !important; }
+}
+
+.grid{position:absolute;inset:0;opacity:.06;mix-blend-mode:soft-light;
+  --c1: rgba(255,255,255,.2); --c2: rgba(255,255,255,0);
+  background-image: radial-gradient(circle at center, var(--c1), var(--c2) 35%);
+}

@@ -1,0 +1,152 @@
+/* Animated Card - 3D Interactive Effects */
+.animated-card {
+  position: relative;
+  background: var(--card);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  transition: transform 0.2s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 
+    0 8px 32px var(--shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  transform: translateZ(16px);
+}
+
+/* 3D Hover Effects */
+.animated-card.hover-3d:hover {
+  box-shadow: 
+    0 20px 60px var(--shadow),
+    0 0 40px var(--glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: var(--primary);
+}
+
+.animated-card.hovered {
+  transition: transform 0.2s ease-out;
+}
+
+/* Glow Effect */
+.card-glow {
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  filter: blur(20px);
+}
+
+.animated-card.glow-effect:hover .card-glow {
+  opacity: 0.25;
+}
+
+/* Shine Effect */
+.card-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.14),
+    transparent
+  );
+  transition: left 0.8s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.animated-card:hover .card-shine {
+  left: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .animated-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+  
+  /* Disable 3D effects on mobile for performance */
+  .animated-card.hover-3d:hover {
+    transform: none;
+  }
+  
+  .animated-card.hovered {
+    transform: none;
+  }
+}
+
+/* Dark Theme Adjustments */
+:root[data-theme="dark"] .animated-card {
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+:root[data-theme="dark"] .animated-card.hover-3d:hover {
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    0 0 40px var(--glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Animation Variants */
+.animated-card.pulse-on-hover:hover {
+  animation: pulse 1.2s ease-in-out;
+}
+
+.animated-card.bounce-on-hover:hover {
+  animation: bounce 0.7s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 20%, 60%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  80% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Loading State */
+.animated-card.loading {
+  pointer-events: none;
+}
+
+.animated-card.loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: loading-shimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

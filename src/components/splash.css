@@ -1,0 +1,40 @@
+/* Splash Gen Z: gold morphing intro - Diamond with K */
+.splash{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:1000; background:#0b1220; color:#f1f5f9; overflow:hidden; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+.splash-genz{ isolation:isolate; }
+
+/* Bubble morph reveal */
+.intro-mask{ position:absolute; inset:0; pointer-events:none; background: radial-gradient(60vmin 60vmin at 50% 50%, rgba(212,175,55,.18), rgba(0,0,0,0));
+  animation: bubble-reveal 950ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes bubble-reveal{
+  0%{ clip-path: circle(0% at 50% 50%); opacity:0 }
+  40%{ opacity:.8 }
+  100%{ clip-path: circle(150% at 50% 50%); opacity:.0 }
+}
+
+/* SVG layout */
+.logo-svg{ width:clamp(220px, 62vw, 560px); height:auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,.35)); opacity:0; animation: logo-fade 500ms ease-out 300ms forwards; }
+@keyframes logo-fade{ from{ opacity:0; transform: translateY(8px) scale(.98) } to{ opacity:1; transform: translateY(0) scale(1) } }
+
+/* Stroke drawing for diamond border */
+.draw-border{ stroke-dasharray:100; stroke-dashoffset:100; animation: draw-stroke 1200ms ease-out 250ms forwards, glow-pulse 2800ms 1500ms ease-in-out infinite; will-change: stroke-dashoffset, filter; }
+@keyframes draw-stroke{ to{ stroke-dashoffset:0 } }
+
+/* Letter K effects */
+.k-back{ opacity:0; animation: extrude-in 680ms ease-out 540ms forwards; }
+.k-letter{ opacity:0; transform: translateY(8px) scale(.98); animation: k-rise 720ms cubic-bezier(0.22, 1, 0.36, 1) 650ms forwards; }
+@keyframes extrude-in{ from{ opacity:0; transform: translate(8px,12px) } to{ opacity:.95; transform: translate(3px,5px) } }
+@keyframes k-rise{ to{ opacity:1; transform: translateY(0) scale(1) } }
+
+/* Moving glint */
+.glint-layer{ mix-blend-mode: screen; }
+.glint{ fill: rgba(255,255,255,.08); filter: blur(8px); transform: translateX(-600px) rotate(20deg); animation: glint-sweep 1800ms ease-in-out 900ms forwards; will-change: transform, opacity; }
+@keyframes glint-sweep{ to{ transform: translateX(600px) rotate(20deg) } }
+
+/* Glow pulse on border */
+@keyframes glow-pulse{ 0%{ filter: drop-shadow(0 0 0 rgba(212,175,55,.0)) } 50%{ filter: drop-shadow(0 0 16px rgba(212,175,55,.35)) } 100%{ filter: drop-shadow(0 0 0 rgba(212,175,55,.0)) } }
+
+/* Reduce Motion: non-essential animations off */
+@media (prefers-reduced-motion: reduce) {
+  .intro-mask, .draw-border, .k-back, .k-letter, .glint { animation: none !important; }
+}

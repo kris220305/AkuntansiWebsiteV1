@@ -1,0 +1,33 @@
+/* Morph overlay: bubble ganda dengan gradien neon */
+.morph{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:0;}
+.morph.show{opacity:1}
+
+.morph .bubble{position:absolute;inset:0;clip-path:circle(0% at var(--x,50%) var(--y,50%));
+  background:radial-gradient(closest-side, rgba(255,255,255,.08), rgba(139,92,246,.40) 40%, rgba(34,211,238,.50) 70%, rgba(0,0,0,0));
+  filter:saturate(115%) blur(.4px);
+  animation:bubble-expand 800ms ease-in-out forwards;
+}
+
+.morph .bubble-2{position:absolute;inset:0;clip-path:circle(0% at calc(var(--x,50%) + 2%) calc(var(--y,50%) + 2%));
+  background:radial-gradient(closest-side, rgba(255,255,255,.05), rgba(34,211,238,.38) 40%, rgba(139,92,246,.48) 70%, rgba(0,0,0,0));
+  filter:saturate(125%) blur(1px); opacity:.9;
+  animation:bubble-expand-2 900ms ease-in-out forwards;
+}
+
+@keyframes bubble-expand{
+  0%{clip-path:circle(0% at var(--x,50%) var(--y,50%)); opacity:.8}
+  50%{clip-path:circle(35% at var(--x,50%) var(--y,50%)); opacity:.95}
+  100%{clip-path:circle(150% at var(--x,50%) var(--y,50%)); opacity:0}
+}
+
+@keyframes bubble-expand-2{
+  0%{clip-path:circle(0% at calc(var(--x,50%) + 2%) calc(var(--y,50%) + 2%)); opacity:.6}
+  50%{clip-path:circle(45% at calc(var(--x,50%) + 2%) calc(var(--y,50%) + 2%)); opacity:.9}
+  100%{clip-path:circle(160% at calc(var(--x,50%) + 2%) calc(var(--y,50%) + 2%)); opacity:0}
+}
+
+/* Reduce Motion */
+@media (prefers-reduced-motion: reduce) {
+  .morph .bubble,
+  .morph .bubble-2 { animation: none !important; opacity: 0 !important; }
+}
